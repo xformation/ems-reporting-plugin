@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "description": "Carbone js",
+  "scripts": {},
+  "repository": {},
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raintank/app-plugin-worldping/issues"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "carbone": "^1.2.1",
+    "formidable": "^1.2.2"
+  }
+}
