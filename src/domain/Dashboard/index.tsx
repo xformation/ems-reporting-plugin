@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { PivotTable } from './PivotTable';
 
 export class Dashboard extends React.Component<any, any> {
     fileRef: any;
@@ -40,12 +41,15 @@ export class Dashboard extends React.Component<any, any> {
         const state = this.state;
         return (
             <div className="container dashboard-container">
+                <div className="m-b-3">
+                    <PivotTable />
+                </div>
                 <form>
                     <input type="file" ref={this.fileRef} />
                     <br />
                     <textarea className="m-t-2" value={state.json} name="json" onChange={this.handleStateChange} style={{width: "300px", height:"300px", color: "black"}}></textarea>
                     <br />
-                    <button className="m-t-2" onClick={this.onClickSubmit}>Submit</button>
+                    <button className="m-t-2 btn btn-success" onClick={this.onClickSubmit}>Submit</button>
                 </form>
             </div>
         );
