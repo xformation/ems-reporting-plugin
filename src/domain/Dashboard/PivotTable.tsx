@@ -2,6 +2,7 @@ import * as React from 'react';
 import PivotTableUI from 'react-pivottable/PivotTableUI';
 import 'react-pivottable/pivottable.css';
 import TableRenderers from 'react-pivottable/TableRenderers';
+import { sortAs } from 'react-pivottable/Utilities';
 import Plot from 'react-plotly.js';
 const createPlotlyRenderers = require('react-pivottable/PlotlyRenderers');
 const PlotlyRenderers = createPlotlyRenderers(Plot);
@@ -12,6 +13,7 @@ export class PivotTable extends React.Component<any, any> {
         super(props);
         this.state = {
             pivotState: {
+                mode: 'demo',
                 data: dummyData,
                 rows: ['Payer Gender'],
                 cols: ['Party Size'],
@@ -20,6 +22,15 @@ export class PivotTable extends React.Component<any, any> {
                 rendererName: 'Grouped Column Chart',
                 plotlyOptions: { width: 500, height: 500 },
                 plotlyConfig: {},
+                sorters: {
+                    Meal: sortAs(['Lunch', 'Dinner']),
+                    'Day of Week': sortAs([
+                        'Thursday',
+                        'Friday',
+                        'Saturday',
+                        'Sunday',
+                    ]),
+                },
                 tableOptions: {
                     clickCallback: function (e: any, value: any, filters: any, pivotData: any) {
                         var names: any = [];
@@ -49,17 +60,17 @@ export class PivotTable extends React.Component<any, any> {
         });
     };
 
-    handleStateChange = (e:any)=>{
-        const {name, value} = e.target;
+    handleStateChange = (e: any) => {
+        const { name, value } = e.target;
         this.setState({
             [name]: value
         });
     };
 
-    applyData = (e:any) =>{
-        const {savedData, pivotState } = this.state;
+    applyData = (e: any) => {
+        const { savedData, pivotState } = this.state;
         this.setState({
-            pivotState:{
+            pivotState: {
                 ...pivotState,
                 ...JSON.parse(savedData)
             },
@@ -70,7 +81,9 @@ export class PivotTable extends React.Component<any, any> {
         return (
             <React.Fragment>
                 <textarea value={this.state.savedData} name="savedData" onChange={this.handleStateChange}></textarea>
+                <br />
                 <button className="btn btn-success" onClick={this.applyData}>Apply Data</button>
+                <br />
                 <PivotTableUI
                     renderers={Object.assign(
                         {},
