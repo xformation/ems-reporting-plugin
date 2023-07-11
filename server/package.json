@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "carbone": "^1.2.1",
+    "carbone": "^3.5.5",
     "formidable": "^1.2.2"
   }
 }
